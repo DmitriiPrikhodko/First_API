@@ -1,0 +1,6 @@
+*__pycache__
+.vscode
+d
+*/.DS_Store
+.venv/
+# .venv/lib/python3.9/site-packages/setuptools/command/__pycache__/__init__.cpython-39.pyc
