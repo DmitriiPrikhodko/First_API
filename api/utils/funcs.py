@@ -17,6 +17,19 @@ MAIN_DIR = os.path.dirname("main.py")
 WEIGHTS_DIR = os.path.join(MAIN_DIR, "api", "weights")
 
 
+
+def download_from_public_link(public_url, local_filename):
+    try:
+        response = requests.get(public_url, stream=True)
+        response.raise_for_status()
+        
+        with open(local_filename, 'wb') as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка при загрузке: {e}")
+
+
 def pil_to_base64(img: Image.Image) -> str:
     """Конвертирует PIL.Image в base64 строку"""
     buffer = BytesIO()

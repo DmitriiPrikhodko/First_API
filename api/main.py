@@ -11,15 +11,8 @@ from pydantic import BaseModel, field_validator
 from utils.funcs import *
 from io import BytesIO
 
-
 logger = logging.getLogger("uvicorn.info")
 
-
-# class ImageInput(BaseModel):
-#     image: Image
-#     model_config = {
-#         "arbitrary_types_allowed": True  # 👈 вот эта строка решает твою ошибку
-#     }
 
 
 class ImageResponse(BaseModel):
@@ -28,42 +21,6 @@ class ImageResponse(BaseModel):
     model_config = {
         "arbitrary_types_allowed": True  # 👈 вот эта строка решает твою ошибку
     }
-
-    # # Валидатор для mask
-    # @field_validator("mask", mode="before")
-    # @classmethod
-    # def validate_mask(cls, v):
-    #     return cls._to_image(v, "mask")
-
-    # # Валидатор для masked_image
-    # @field_validator("masked_image", mode="before")
-    # @classmethod
-    # def validate_masked_image(cls, v):
-    #     return cls._to_image(v, "masked_image")
-
-    # @staticmethod
-    # def _to_image(v, field_name: str):
-    #     """Преобразует входные данные в объект PIL.Image.Image"""
-    #     if isinstance(v, Image.Image):
-    #         return v
-
-    #     if isinstance(v, (bytes, bytearray)):
-    #         try:
-    #             return Image.open(BytesIO(v))
-    #         except Exception as e:
-    #             raise ValueError(
-    #                 f"Поле '{field_name}': не удалось прочитать изображение: {e}"
-    #             )
-
-    #     if isinstance(v, str):
-    #         try:
-    #             return Image.open(v)
-    #         except Exception as e:
-    #             raise ValueError(f"Поле '{field_name}': не удалось открыть файл: {e}")
-
-    #     raise TypeError(
-    #         f"Поле '{field_name}': ожидается PIL.Image.Image, bytes или путь к файлу"
-    #     )
 
 
 class TextInput(BaseModel):

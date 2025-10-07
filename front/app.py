@@ -21,7 +21,9 @@ def main():
             files = {"file": image}
             # send data and get the result
             res = requests.post(
-                "http://127.0.0.1:8000/segment_image", files=files
+                "http://158.160.128.217:8000/segment_image",
+                files=files,
+                # "http://127.0.0.1:8000/segment_image", files=files
             ).json()
             st.write("ответ получен")
             mask = Image.open(BytesIO(base64.b64decode(res["mask"])))
@@ -51,7 +53,11 @@ def main():
         txt = st.text_input("Classify posts")
         if st.button("Classify"):
             text = {"text": txt}
-            res = requests.post("http://127.0.0.1:8000/clf_post", json=text)
+            res = requests.post(
+                "http://158.160.128.217:8000/clf_post",
+                # "http://127.0.0.1:8000/clf_post",
+                json=text,
+            )
             st.write(txt)
             st.write(f' Class: {res.json()["label"]}')
             st.write(f'Probability: {res.json()["prob"]:.2f}')
